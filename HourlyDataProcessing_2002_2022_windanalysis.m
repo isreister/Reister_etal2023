@@ -239,8 +239,11 @@ covarianceMatrix2 = cov(XX);
 % Multiply the original data by the principal component vectors to get the
 % projections of the original data on the principal component vector space.
 % % This is also the output "score". Compare ...
-sampleuv10_InPCSpace = X*coeff;
-uv10_InPCSpace = XX*coeff2;
+sampleuv10_InPCSpace_singlepoint = X*coeff;
+uv10_InPCSpace_singlepoint = XX*coeff2;
+
+sampleuv10_InPCSpace = X*coeff3;
+uv10_InPCSpace = XX*coeff4;
 
 
 %rotation angles
@@ -562,27 +565,27 @@ char_all=char(string(length(averaged_v10)));
 wind_rose(rad2deg(alldirection),avgws10);
 char_yearstart=char(string(max(year(wT))));
 char_yearend=char(string(min(year(wT))));
-title(['Wind anomolies for ',char_yearstart,'-',char_yearend,' (N=',char_all,')'])
+title(['Demeaned  All Wind anomolies for ',char_yearstart,'-',char_yearend,' (N=',char_all,')'])
 saveas(figure(6),'C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\API\sample\results\annualcycle\satilliteUTC13_special_allwind.png')
 
 %this is all sample wind
 
 
 wind_rose(rad2deg(direction),samplews10);
-title(['Wind Speed and Direction anomlies for all samples(N=',char_sample,')'])
+title(['Demeaned All Wind Speed and Direction anomlies for all samples(N=',char_sample,')'])
 saveas(figure(7),'C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\API\sample\results\annualcycle\satilliteUTC13_special_allsamplewindP.png')
 
 %this is z>-5000 
 
 char_samplesummer=char(string(length(samplews10(indisummertime))));
 wind_rose(rad2deg(direction(indisummertime)),samplews10(indisummertime));
-title(['Wind anmolies for Summer mode of E1 (N=',char_samplesummer,')'])
+title(['Demeaned Wind anmolies for Summer mode of E1 (N=',char_samplesummer,')'])
 saveas(figure(9),'C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\API\sample\results\annualcycle\satilliteUTC13_special_summerwindP.png')
 
 %this is z<-10000 
 char_samplewinter=char(string(length(samplews10(indiwintertime))));
 wind_rose(rad2deg(direction(indiwintertime)),samplews10(indiwintertime));
-title(['Wind Anomlies for Winter mode of E1 (N=',char_samplewinter,')'])
+title(['Demeaned Wind Anomlies for Winter mode of E1 (N=',char_samplewinter,')'])
 
 saveas(figure(10),'C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\API\sample\results\annualcycle\satilliteUTC13_special_winterwindP.png')
 
@@ -599,36 +602,48 @@ direction_true=atan2(sampleuv10_InPCSpace(:,1),sampleuv10_InPCSpace(:,2));
 
 %this is all wind in the time period:
 wind_rose(rad2deg(alldirection_true),avgws10_true);
-title(['Wind for ',char_yearstart,'-',char_yearend,' (N=',char_all,')'])
+title(['True Wind for ',char_yearstart,'-',char_yearend,' (N=',char_all,')'])
 saveas(figure(11),'C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\API\sample\results\annualcycle\satilliteUTC13_special_allwind_true.png')
 
 %this is all sample wind
 
 
 wind_rose(rad2deg(direction_true),samplews10_true);
-title(['Wind Speed and Direction anomlies for all samples(N=',char_sample,')'])
+title(['True Wind Speed and Direction anomlies for all samples(N=',char_sample,')'])
 saveas(figure(12),'C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\API\sample\results\annualcycle\satilliteUTC13_special_allsamplewindP_true.png')
 
 %this is z>-5000 
 
 
 wind_rose(rad2deg(direction_true(indisummertime)),samplews10_true(indisummertime));
-title(['Wind anmolies for Summer mode of E1 (N=',char_samplesummer,')'])
+title(['True Wind anmolies for Summer mode of E1 (N=',char_samplesummer,')'])
 saveas(figure(13),'C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\API\sample\results\annualcycle\satilliteUTC13_special_summerwindP_true.png')
 
 %this is z<-10000 
 
 
 wind_rose(rad2deg(direction_true(indiwintertime)),samplews10_true(indiwintertime));
-title(['Wind Anomlies for Winter mode of E1 (N=',char_samplewinter,')'])
+title(['True Wind Anomlies for Winter mode of E1 (N=',char_samplewinter,')'])
 
 saveas(figure(14),'C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\API\sample\results\annualcycle\satilliteUTC13_special_winterwindP_true.png')
 
-samplecoeff=coeff;
-allwindcoeff=coeff2;
+samplecoeff_singlepoint=coeff;
+allwindcoeff_singlepoint=coeff2;
+
+samplecoeff=coeff3;
+allwindcoeff=coeff4;
+
+%single point
+rotangle_sample_singlepoint=alpha;
+rotangle_all_singlepoint=alpha2;
+
+%averaged 6 grid point
+rotangle_sample_6pointavg=alpha3;
+rotangle_all_6pointavg=alpha4;
+
 
 save('C:\Users\cfosadmin\Documents\MATLAB\Research\Data\WindCopperRiver\my_results\satilliteUTC13_special_windanalysis_results.mat','direction','P','wT','singlepoint_sampleuv10','singlepoint_uv10'...
-,'sampleuv10_InPCSpace','uv10_InPCSpace','mean_uvall','mean_uvsample','direction_true','samplews10_true','alldirection_true','avgws10_true','allwindcoeff','samplecoeff');
+,'mean_uvsample_singlepoint','mean_uvall_singlepoint','samplecoeff_singlepoint','allwindcoeff_singlepoint','rotangle_all_6pointavg','rotangle_sample_6pointavg','rotangle_sample_singlepoint','rotangle_all_singlepoint','sampleuv10_InPCSpace','uv10_InPCSpace','mean_uvall','mean_uvsample','direction_true','samplews10_true','alldirection_true','avgws10_true','allwindcoeff','samplecoeff','sampleuv10_InPCSpace_singlepoint','uv10_InPCSpace_singlepoint');
 %load('C:\Users\cfosadmin\Documents\MATLAB\Research\Data\WindCopperRiver\my_results\windanalysis_results.mat')
 
 
