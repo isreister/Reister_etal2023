@@ -209,10 +209,10 @@ AXX=averaged_singlepoint_uv10;
 %less and the surface goes along with it. The wind is...more variable so
 %it's mean is not felt by the surface? Ugh. I'm still not sure. 
 
-mean_uvall=mean(XX);
-mean_uvsample=mean(X);
-mean_avguvall=mean(AXX);
-mean_avguvsample=mean(AX);
+mean_uvall_singlepoint=mean(XX);
+mean_uvsample_singlepoint=mean(X);
+mean_uvall_avg=mean(AXX);
+mean_uvsample_avg=mean(AX);
 X = X - mean(X); 
 XX= XX - mean(XX); %repeat for all data, not just sample data.
 AX=AX-mean(AX); %above is single point. Now this is the averaged point.
@@ -242,7 +242,7 @@ covarianceMatrix2 = cov(XX);
 sampleuv10_InPCSpace_singlepoint = X*coeff;
 uv10_InPCSpace_singlepoint = XX*coeff2;
 
-sampleuv10_InPCSpace = X*coeff3;
+sampleuv10_InPCSpace = X*coeff3;%% IMPORTANT. These are from 13 UTC to 13 UTC.
 uv10_InPCSpace = XX*coeff4;
 
 
@@ -592,8 +592,8 @@ saveas(figure(10),'C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\API\samp
 
 %adding the mean back in:
 
-avgws10_true=(((uv10_InPCSpace(:,1)+mean_uvall(:,1)).^2)+(uv10_InPCSpace(:,2)+mean_uvall(:,2)).^2).^(1/2);
-alldirection_true=atan2(uv10_InPCSpace(:,1)+mean_uvall(:,1),uv10_InPCSpace(:,2)+mean_uvall(:,2));
+avgws10_true=(((uv10_InPCSpace(:,1)+mean_uvall_avg(:,1)).^2)+(uv10_InPCSpace(:,2)+mean_uvall_avg(:,2)).^2).^(1/2);
+alldirection_true=atan2(uv10_InPCSpace(:,1)+mean_uvall_avg(:,1),uv10_InPCSpace(:,2)+mean_uvall_avg(:,2));
 
 samplews10_true=(((sampleuv10_InPCSpace(:,1)+mean_uvsample(:,1)).^2)+(sampleuv10_InPCSpace(:,2)+mean_uvsample(:,2)).^2).^(1/2);
 direction_true=atan2(sampleuv10_InPCSpace(:,1),sampleuv10_InPCSpace(:,2));
@@ -643,7 +643,7 @@ rotangle_all_6pointavg=alpha4;
 
 
 save('C:\Users\cfosadmin\Documents\MATLAB\Research\Data\WindCopperRiver\my_results\satilliteUTC13_special_windanalysis_results.mat','direction','P','wT','singlepoint_sampleuv10','singlepoint_uv10'...
-,'mean_uvsample_singlepoint','mean_uvall_singlepoint','samplecoeff_singlepoint','allwindcoeff_singlepoint','rotangle_all_6pointavg','rotangle_sample_6pointavg','rotangle_sample_singlepoint','rotangle_all_singlepoint','sampleuv10_InPCSpace','uv10_InPCSpace','mean_uvall','mean_uvsample','direction_true','samplews10_true','alldirection_true','avgws10_true','allwindcoeff','samplecoeff','sampleuv10_InPCSpace_singlepoint','uv10_InPCSpace_singlepoint');
+,'mean_uvsample_singlepoint','mean_uvall_singlepoint','samplecoeff_singlepoint','allwindcoeff_singlepoint','rotangle_all_6pointavg','rotangle_sample_6pointavg','rotangle_sample_singlepoint','rotangle_all_singlepoint','sampleuv10_InPCSpace','uv10_InPCSpace','mean_uvall_avg','mean_uvsample','direction_true','samplews10_true','alldirection_true','avgws10_true','allwindcoeff','samplecoeff','sampleuv10_InPCSpace_singlepoint','uv10_InPCSpace_singlepoint');
 %load('C:\Users\cfosadmin\Documents\MATLAB\Research\Data\WindCopperRiver\my_results\windanalysis_results.mat')
 
 
