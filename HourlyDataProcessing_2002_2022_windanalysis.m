@@ -19,8 +19,13 @@
 % the horizontal 10m wind.
 clear all 
 close all
-load('sampletimes.mat');
-load('C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\API\sample\results\50Ktest\v4_less_strict128_EOFallresultsPP.mat');
+load('v5_sampletimes_SE.mat');
+load('C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\API\sample\results\Seasonal\v5_less_strict128_EOFallresultsPP.mat');
+
+%old version that had only 294 images.
+%load('sampletimes.mat');
+%load('C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\API\sample\results\50Ktest\v4_less_strict128_EOFallresultsPP.mat');
+
 sT=T;
 ncsource1='C:\Users\cfosadmin\Documents\MATLAB\Research\data\WindCopperRiver\hourlyData2002-2022\adaptor.mars.internal-1686094391.3367488-3810-18-653f8a5d-8d78-49a3-a1b5-eb25911fd2fa.nc'; %uv 2000-2007
 ncsource2='C:\Users\cfosadmin\Documents\MATLAB\Research\data\WindCopperRiver\hourlyData2002-2022\adaptor.mars.internal-1686099790.2569082-17318-11-064e734d-f946-4bb2-84c7-ffa634b441f2.nc'; %uv 2008-2013
@@ -595,8 +600,8 @@ saveas(figure(10),'C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\API\samp
 avgws10_true=(((uv10_InPCSpace(:,1)+mean_uvall_avg(:,1)).^2)+(uv10_InPCSpace(:,2)+mean_uvall_avg(:,2)).^2).^(1/2);
 alldirection_true=atan2(uv10_InPCSpace(:,1)+mean_uvall_avg(:,1),uv10_InPCSpace(:,2)+mean_uvall_avg(:,2));
 
-samplews10_true=(((sampleuv10_InPCSpace(:,1)+mean_uvsample(:,1)).^2)+(sampleuv10_InPCSpace(:,2)+mean_uvsample(:,2)).^2).^(1/2);
-direction_true=atan2(sampleuv10_InPCSpace(:,1),sampleuv10_InPCSpace(:,2));
+samplews10_true=(((sampleuv10_InPCSpace(:,1)+mean_uvsample_avg(:,1)).^2)+(sampleuv10_InPCSpace(:,2)+mean_uvsample_avg(:,2)).^2).^(1/2);
+direction_true=atan2(sampleuv10_InPCSpace(:,1)+mean_uvsample_avg(:,1),sampleuv10_InPCSpace(:,2)+mean_uvsample_avg(:,2)); %the mean_uvsample_avg was not being added in here. 6/12/23-Isaac. Seems like it should.
 
 
 
@@ -643,7 +648,8 @@ rotangle_all_6pointavg=alpha4;
 
 
 save('C:\Users\cfosadmin\Documents\MATLAB\Research\Data\WindCopperRiver\my_results\satilliteUTC13_special_windanalysis_results.mat','direction','P','wT','singlepoint_sampleuv10','singlepoint_uv10'...
-,'mean_uvsample_singlepoint','mean_uvall_singlepoint','samplecoeff_singlepoint','allwindcoeff_singlepoint','rotangle_all_6pointavg','rotangle_sample_6pointavg','rotangle_sample_singlepoint','rotangle_all_singlepoint','sampleuv10_InPCSpace','uv10_InPCSpace','mean_uvall_avg','mean_uvsample','direction_true','samplews10_true','alldirection_true','avgws10_true','allwindcoeff','samplecoeff','sampleuv10_InPCSpace_singlepoint','uv10_InPCSpace_singlepoint');
+,'mean_uvsample_singlepoint','mean_uvall_singlepoint','samplecoeff_singlepoint','allwindcoeff_singlepoint','rotangle_all_6pointavg','rotangle_sample_6pointavg','rotangle_sample_singlepoint','rotangle_all_singlepoint','sampleuv10_InPCSpace','uv10_InPCSpace','mean_uvall_avg','mean_uvsample_avg','direction_true','samplews10_true','alldirection_true','avgws10_true','allwindcoeff','samplecoeff','sampleuv10_InPCSpace_singlepoint','uv10_InPCSpace_singlepoint');
 %load('C:\Users\cfosadmin\Documents\MATLAB\Research\Data\WindCopperRiver\my_results\windanalysis_results.mat')
 
 
+%saveas(figure(1),'C:\Users\cfosadmin\Documents\MATLAB\Research\Figures\CopperRiverPaper\distofseasonaldataset')%6/12/23 this is our distribution. Done in command line with histogram.
