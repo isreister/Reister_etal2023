@@ -19,3 +19,4 @@ deep_parselLTERV2.m %%%%%% is a function that takes in an table (produced by LTE
 
 mydates_satretrieval_v2.m %%%% %This script is where you can select what satillite dates you want to retreive from the aqua and terra MODIS satillites. IT then runs the function WMSsatretrieval.m which does the heavy lifting of deciding which if the satillite images are worth keeping given the cloud cover, as well as creating a directory and saving the image in that directory. Search for root in WMSsatretrieval to see the directory path.
 
+NOTE that mydates_satretrieval_v2.m and WMSsatretrieval.m can be used seperate from everything else.
